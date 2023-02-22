@@ -1,0 +1,83 @@
+
+<form id="form" (ngSubmit)="Login()" #myForm="ngForm">
+
+ <mat-form-field appearance="fill">
+ <mat-label>Your first name</mat-label>
+    <input matInput  [(ngModel)]="user.firstName" name="firstName"  [ngModelOptions]="{standalone: true}"
+           #iden1="ngModel" minlength="2" pattern="[a-zA-Zא-ת]*" required >
+    <p *ngIf="iden1.touched&&iden1.invalid"  class="error">שדה חובה ללא מספרים</p>
+ </mat-form-field>
+
+ <mat-form-field appearance="fill">
+ <mat-label>Your last name</mat-label>
+      <input matInput [(ngModel)]="user.lastName" name="lastName" [ngModelOptions]="{standalone: true}"
+         #iden2="ngModel" minlength="2"  pattern="[a-zA-Zא-ת]*" required >
+      <p *ngIf="iden2.touched&&iden2.invalid"  class="error">שדה חובה ללא מספרים</p>
+ </mat-form-field>
+
+ <mat-form-field appearance="fill">
+  <mat-label>Your identity number</mat-label>
+  <input matInput  [(ngModel)]="user.personalNumber" name="identity"  [ngModelOptions]="{standalone: true}"
+        #iden3="ngModel"  maxlength="9" minlength="9" pattern="[0-9]+" required>
+      <p *ngIf="iden3.touched&&iden3.invalid"  class="error">שדה חובה המכיל תשעה ספרות</p>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+  <mat-label>Your birth day</mat-label>
+         <input matInput type="date"  [(ngModel)]="user.dateofbirth" name="birthDay"  [ngModelOptions]="{standalone: true}"
+           #iden4="ngModel" required>
+         <p *ngIf="iden4.touched&&iden4.invalid" class="error">שדה חובה</p>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Gener</mat-label>
+    <mat-select>
+      <mat-option value="0">male</mat-option>
+      <mat-option value="1"> fmale</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>HMO</mat-label>
+    <mat-select>
+      <mat-option value="0">Clalit</mat-option>
+      <mat-option value="1"> Meuchedet</mat-option>
+      <mat-option value="2"> Leumit</mat-option>
+      <mat-option value="3"> Macabi</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  
+  <!-----------------------------------------------------------------add child---------------------------------------------- -->
+
+  <button mat-stroked-button *ngIf="!isChild" (click)="isChild=!isChild">Add child</button>
+  
+  <div *ngIf="isChild">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Child name</mat-label>
+          <input matInput  [(ngModel)]="child.name" name="nameChild"  [ngModelOptions]="{standalone: true}"
+            #iden5="ngModel" minlength="2" pattern="[a-zA-Zא-ת]*" required >
+          <p *ngIf="iden5.touched&&iden5.invalid"  class="error">שדה חובה ללא מספרים</p>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+    <mat-label>Child identity number</mat-label>
+    <input matInput  [(ngModel)]="child.personalNumber" name="identityChild"  [ngModelOptions]="{standalone: true}"
+       #iden6="ngModel"  maxlength="9" minlength="9" pattern="[0-9]+" required>
+       <p *ngIf="iden6.touched&&iden6.invalid"  class="error">שדה חובה המכיל תשעה ספרות</p>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+    <mat-label>Child birth day</mat-label>
+        <input matInput type="date"   [(ngModel)]="child.birthDate" name="birthDayChild"  [ngModelOptions]="{standalone: true}"
+          #iden7="ngModel" required>
+         <p *ngIf="iden7.touched&&iden7.invalid" class="error">שדה חובה</p>
+    </mat-form-field>
+  </div>
+  <button mat-stroked-button  *ngIf="isChild" [(ngModel)]="child" (click)="saveMoreChild()" [ngModelOptions]="{standalone: true}" >Save child</button>
+   <br/>
+  <button mat-stroked-button type="submit" id="submit-input" [disabled]="myForm.invalid">Save</button>
+</form> 
+
+
